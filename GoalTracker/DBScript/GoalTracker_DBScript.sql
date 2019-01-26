@@ -80,7 +80,9 @@ CREATE TABLE fitnessExercises (
 	id INT PRIMARY KEY IDENTITY(1,1),
 	[name] VARCHAR(50) NOT NULL,
 	[description] VARCHAR(50) NOT NULL,
-	fitnessExerciseCategoryId INT NOT NULL
+	-- fitnessExerciseCategoryId INT NOT NULL
+	-- can not set not null becuase need to defual it to null when PK gets deleted
+	fitnessExerciseCategoryId INT
 )
 
 
@@ -123,7 +125,9 @@ ON DELETE CASCADE;
 ALTER TABLE fitnessExercises
 ADD CONSTRAINT FK_ExerciseCategoryExercise
 FOREIGN KEY (fitnessExerciseCategoryId) REFERENCES fitnessExerciseCategories(id)
-ON DELETE CASCADE;
+-- ON DELETE CASCADE;
+-- can not ON DELETE CASCADE becuase fitnessPlansExercises table refers to fitnessExercises id
+On Delete Set Null
 
 ALTER TABLE userFitnessExercises
 ADD CONSTRAINT FK_UserFitnessExerciseFitnessExercise
