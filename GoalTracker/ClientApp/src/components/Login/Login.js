@@ -41,7 +41,7 @@ export class Login extends Component {
       <div className="Login">
         <div id="login-form">
           <h1 className="text-center">Login</h1>
-          <form className="form-horizontal col-sm-6 col-sm-offset-3">
+          <form className="form-horizontal col-sm-4 col-sm-offset-4">
             <div className="form-group">
               <div className="input-group">
                 <span className="input-group-addon" id="basic-addon1">
@@ -71,6 +71,9 @@ export class Login extends Component {
                   onChange={this.passwordChange}
                 />
               </div>
+            </div>
+            <div className="form-group text-center">
+              <a href="#">Need to Register?</a>
             </div>
             <div className="form-group">
               <div className="col-sm-12">
