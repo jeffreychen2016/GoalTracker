@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import authRequests from '../../firebaseRequests/auth';
+import { Link } from 'react-router-dom'; 
 
 export class Login extends Component {
     
@@ -73,7 +74,7 @@ export class Login extends Component {
               </div>
             </div>
             <div className="form-group text-center">
-              <a href="#">Need to Register?</a>
+              <Link to="/register">Need to Register</Link>
             </div>
             <div className="form-group">
               <div className="col-sm-12">

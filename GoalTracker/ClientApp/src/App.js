@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { Login } from './components/Login/Login';
+import { Register } from './components/Register/Register';
 import firebase from 'firebase';
 import fbConnection from '../src/firebaseRequests/connection';
 import authRequests from '../src/firebaseRequests/auth';
@@ -92,6 +93,11 @@ export default class App extends Component {
           <PublicRoute 
             path='/login' 
             component={Login} 
+            authed={this.state.authed}
+          />
+          <PublicRoute 
+            path='/register' 
+            component={Register} 
             authed={this.state.authed}
           />
         </Switch>
