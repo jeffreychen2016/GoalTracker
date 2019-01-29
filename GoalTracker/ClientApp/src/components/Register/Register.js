@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import authRequests from '../../firebaseRequests/auth';
 import { Link } from 'react-router-dom'; 
+import './Register.css'
 
 export class Register extends Component {
     
@@ -32,7 +33,7 @@ export class Register extends Component {
         this.props.history.push('/counter');
       })
       .catch(error => {
-        console.error('there was an error while trying to login', error);
+        console.error('there was an error while trying to register', error);
       });
   };
 
@@ -44,9 +45,9 @@ export class Register extends Component {
           <h1 className="text-center">Register</h1>
           <form className="form-horizontal col-sm-4 col-sm-offset-4">
           <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon" id="basic-addon1">
-                  <span className="glyphicon glyphicon-user"></span>
+              <div className="input-group register-table">
+                <span className="input-group-addon register-input-group-addon" id="basic-addon1">
+                  <span>First Name</span>
                 </span>
                 <input 
                   type="text" 
@@ -59,9 +60,9 @@ export class Register extends Component {
               </div>
             </div>
             <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon" id="basic-addon1">
-                  <span className="glyphicon glyphicon-user"></span>
+              <div className="input-group register-table">
+                <span className="input-group-addon register-input-group-addon" id="basic-addon1">
+                  <span>Last Name</span>
                 </span>
                 <input 
                   type="text" 
@@ -74,9 +75,9 @@ export class Register extends Component {
               </div>
             </div>
             <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon" id="basic-addon1">
-                  <span className="glyphicon glyphicon-user"></span>
+              <div className="input-group register-table">
+                <span className="input-group-addon register-input-group-addon" id="basic-addon1">
+                  <span>Email</span>
                 </span>
                 <input 
                   type="text" 
@@ -89,9 +90,9 @@ export class Register extends Component {
               </div>
             </div>
             <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon" id="basic-addon1">
-                  <span className="glyphicon glyphicon-lock"></span>
+              <div className="input-group register-table">
+                <span className="input-group-addon register-input-group-addon" id="basic-addon1">
+                  <span>Password</span>
                 </span>
                 <input 
                   type="password" 
