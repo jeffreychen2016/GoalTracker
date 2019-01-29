@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import authRequests from '../../firebaseRequests/auth';
 import { Link } from 'react-router-dom'; 
 
-export class Login extends Component {
+export class Register extends Component {
     
   state = {
     user: {
@@ -41,8 +41,38 @@ export class Login extends Component {
     return (
       <div className="Login">
         <div id="login-form">
-          <h1 className="text-center">Login</h1>
+          <h1 className="text-center">Register</h1>
           <form className="form-horizontal col-sm-4 col-sm-offset-4">
+          <div className="form-group">
+              <div className="input-group">
+                <span className="input-group-addon" id="basic-addon1">
+                  <span className="glyphicon glyphicon-user"></span>
+                </span>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="First Name" 
+                  aria-describedby="basic-addon1" 
+                  value={user.email}
+                  onChange={this.emailChange}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="input-group">
+                <span className="input-group-addon" id="basic-addon1">
+                  <span className="glyphicon glyphicon-user"></span>
+                </span>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="Last Name" 
+                  aria-describedby="basic-addon1" 
+                  value={user.email}
+                  onChange={this.emailChange}
+                />
+              </div>
+            </div>
             <div className="form-group">
               <div className="input-group">
                 <span className="input-group-addon" id="basic-addon1">
@@ -74,7 +104,7 @@ export class Login extends Component {
               </div>
             </div>
             <div className="form-group text-center">
-              <Link to="/register">Need to Register</Link>
+              <Link to="/login">Back to Login</Link>
             </div>
             <div className="form-group">
               <div className="col-sm-12">
