@@ -10,9 +10,16 @@ import fbConnection from '../src/firebaseRequests/connection';
 fbConnection();
 
 export default class App extends Component {
+
+  logout = () => {
+    this.setState({authed: false});
+  };
+
   render() {
     return (
-      <Layout>
+      <Layout
+        logout = {this.logout}
+      >
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
         <Route path='/fetchdata' component={FetchData} />
