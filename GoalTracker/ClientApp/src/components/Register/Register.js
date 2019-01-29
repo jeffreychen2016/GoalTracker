@@ -9,8 +9,27 @@ export class Register extends Component {
     user: {
       email: 'jeffreychen2016@gmail.com',
       password: '123456',
+      firstName: '',
+      lastName: '',
+      isActive: 1,
+      isAdmin: 0,
+      firebaseId: ''
     },
   };
+
+  registerClickEvent = (e) => {
+    const { user } = this.state;
+    e.preventDefault();
+    authRequests
+      .registerUser(user)
+      .then(() => {
+        this.props.history.push('/counter');
+      })
+      .catch(error => {
+        console.error('there was an error when registering', error);
+      });
+  };
+
 
   emailChange = e => {
     const tempUser = { ...this.state.user };
@@ -22,19 +41,6 @@ export class Register extends Component {
     const tempUser = { ...this.state.user };
     tempUser.password = e.target.value;
     this.setState({ user: tempUser });
-  };
-
-  loginClickEvent = (e) => {
-    const { user } = this.state;
-    e.preventDefault();
-    authRequests
-      .loginUser(user)
-      .then(() => {
-        this.props.history.push('/counter');
-      })
-      .catch(error => {
-        console.error('there was an error while trying to register', error);
-      });
   };
 
   render() {
@@ -112,9 +118,9 @@ export class Register extends Component {
                 <button
                   type="submit"
                   className="btn btn-default col-xs-12"
-                  onClick={this.loginClickEvent}
+                  onClick={this.registerClickEvent}
                 >
-                  Login
+                  Register
                 </button>
               </div>
             </div>
