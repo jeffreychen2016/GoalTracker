@@ -12,6 +12,7 @@ export class Layout extends Component {
           <Col sm={3}>
             <NavMenu 
               logout={this.props.logout}
+              authed={this.props.authed}
             />
           </Col>
           <Col sm={9}>
