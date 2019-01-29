@@ -7,6 +7,24 @@ import './NavMenu.css';
 export class NavMenu extends Component {
   displayName = NavMenu.name
 
+  switchLoginAndLogout = () => {
+    if (this.props.authed) {
+      return (            
+        <LinkContainer to={'/counter'} onClick={this.props.logout}>
+          <NavItem>  
+            <Glyphicon glyph='log-out'/> Log Out
+          </NavItem>
+        </LinkContainer>)
+    } else {
+      return (
+      <LinkContainer to={'/login'}>
+        <NavItem>
+          <Glyphicon glyph='log-in' /> Log In
+        </NavItem>
+      </LinkContainer>)
+    }
+  }
+
   render() {
     return (
       <Navbar inverse fixedTop fluid collapseOnSelect>
@@ -33,11 +51,7 @@ export class NavMenu extends Component {
                 <Glyphicon glyph='heart' /> Fitness
               </NavItem>
             </LinkContainer>
-            <LinkContainer to={'/login'}>
-              <NavItem>
-                <Glyphicon glyph='log-in' /> Log In
-              </NavItem>
-            </LinkContainer>
+            {this.switchLoginAndLogout()};
           </Nav>
         </Navbar.Collapse>
       </Navbar>
