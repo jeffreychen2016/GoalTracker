@@ -7,8 +7,8 @@ export class Register extends Component {
     
   state = {
     user: {
-      email: 'jeffreychen2016@gmail.com',
-      password: '123456',
+      email: '',
+      password: '',
       firstName: '',
       lastName: '',
       isActive: 1,
@@ -30,7 +30,6 @@ export class Register extends Component {
       });
   };
 
-
   emailChange = e => {
     const tempUser = { ...this.state.user };
     tempUser.email = e.target.value;
@@ -40,6 +39,18 @@ export class Register extends Component {
   passwordChange = e => {
     const tempUser = { ...this.state.user };
     tempUser.password = e.target.value;
+    this.setState({ user: tempUser });
+  };
+
+  firstNameChange = e => {
+    const tempUser = { ...this.state.user };
+    tempUser.firstName = e.target.value;
+    this.setState({ user: tempUser });
+  };
+
+  lastNameChange = e => {
+    const tempUser = { ...this.state.user };
+    tempUser.firstName = e.target.value;
     this.setState({ user: tempUser });
   };
 
@@ -60,8 +71,8 @@ export class Register extends Component {
                   className="form-control" 
                   placeholder="First Name" 
                   aria-describedby="basic-addon1" 
-                  value={user.email}
-                  onChange={this.emailChange}
+                  value={user.firstName}
+                  onChange={this.firstNameChange}
                 />
               </div>
             </div>
@@ -75,8 +86,8 @@ export class Register extends Component {
                   className="form-control" 
                   placeholder="Last Name" 
                   aria-describedby="basic-addon1" 
-                  value={user.email}
-                  onChange={this.emailChange}
+                  value={user.lastName}
+                  onChange={this.lastNameChange}
                 />
               </div>
             </div>
