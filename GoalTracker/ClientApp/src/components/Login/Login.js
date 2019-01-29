@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormGroup,InputGroup,FormControl} from 'react-bootstrap';
+import authRequests from '../../firebaseRequests/auth';
 
 export class Login extends Component {
     
@@ -22,18 +22,18 @@ export class Login extends Component {
     this.setState({ user: tempUser });
   };
 
-  // loginClickEvent = (e) => {
-  //   const { user } = this.state;
-  //   e.preventDefault();
-  //   authRequests
-  //     .loginUser(user)
-  //     .then(() => {
-  //       this.props.history.push('/counter');
-  //     })
-  //     .catch(error => {
-  //       console.error('there was an error while trying to login', error);
-  //     });
-  // };
+  loginClickEvent = (e) => {
+    const { user } = this.state;
+    e.preventDefault();
+    authRequests
+      .loginUser(user)
+      .then(() => {
+        this.props.history.push('/counter');
+      })
+      .catch(error => {
+        console.error('there was an error while trying to login', error);
+      });
+  };
 
   render() {
     const { user } = this.state;
