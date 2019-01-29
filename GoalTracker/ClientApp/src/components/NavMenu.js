@@ -33,7 +33,7 @@ export class NavMenu extends Component {
                 <Glyphicon glyph='heart' /> Fitness
               </NavItem>
             </LinkContainer>
-            <LinkContainer to={'/fetchdata'}>
+            <LinkContainer to={'/login'}>
               <NavItem>
                 <Glyphicon glyph='log-in' /> Log In
               </NavItem>
