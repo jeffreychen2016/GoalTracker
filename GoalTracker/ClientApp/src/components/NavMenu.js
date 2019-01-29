@@ -10,7 +10,10 @@ export class NavMenu extends Component {
   switchLoginAndLogout = () => {
     if (this.props.authed) {
       return (            
-        <LinkContainer to={'/counter'} onClick={this.props.logout}>
+        <LinkContainer 
+          to={'/login'} 
+          onClick={this.props.logout}
+        >
           <NavItem>  
             <Glyphicon glyph='log-out'/> Log Out
           </NavItem>
