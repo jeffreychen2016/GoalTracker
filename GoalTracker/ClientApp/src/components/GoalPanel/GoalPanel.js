@@ -5,8 +5,16 @@ export class GoalPanel extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className="text-center">Goal Panel</h1>
+      <div className="form-group col-sm-6 col-sm-offset-3">
+        <textarea 
+          className="form-control" 
+          id="exampleFormControlTextarea3" 
+          rows="7"
+          placeholder="Your fitness goal for the year..."
+        >
+        </textarea>
+        <button type="button" className="btn btn-primary btn-rounded">Edit</button>
+        <button type="button" className="btn btn-default btn-rounded">Delete</button>
       </div>
     );
   }

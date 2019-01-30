@@ -30,5 +30,17 @@ namespace GoalTracker.DataAccess
                 return result == 1;
             }
         }
+
+        public int GetUId(string email)
+        {
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+
+                var result = dbConnection.QueryFirst<int>(@"SELECT id FROM users WHERE email = @email", new { email });
+
+                return result;
+            }
+        }
     }
 }
