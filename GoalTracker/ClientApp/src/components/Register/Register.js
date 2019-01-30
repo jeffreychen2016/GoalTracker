@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import authRequests from '../../firebaseRequests/auth';
 import { Link } from 'react-router-dom'; 
 import './Register.css'
+import userRequests from '../../dbRequests/user';
 
 export class Register extends Component {
     
@@ -25,9 +26,10 @@ export class Register extends Component {
       .then(() => {
         //after register user with firebase
         //then also post data to database
-        
-
-        this.props.history.push('/counter');
+        console.error(this.state.user);
+        userRequests.addUser(this.state.user).then(() => {
+          this.props.history.push('/counter');
+        })
       })
       .catch(error => {
         console.error('there was an error when registering', error);

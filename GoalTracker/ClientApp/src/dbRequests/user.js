@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const addUser = () => {
+const addUser = (user) => {
   return new Promise((resolve,reject) => {
     axios
-      .post(`/api/user/adduser`)
+      .post(`/api/user/adduser`,user)
       .then((res) => {
         resolve(res);
       })
