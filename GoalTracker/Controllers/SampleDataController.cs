@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoalTracker.Controllers
@@ -15,8 +17,11 @@ namespace GoalTracker.Controllers
         };
 
         [HttpGet("[action]")]
+        [Authorize]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

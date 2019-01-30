@@ -29,7 +29,7 @@ export class Login extends Component {
     authRequests
       .loginUser(user)
       .then(() => {
-        this.props.history.push('/counter');
+        this.props.history.push('/profile');
       })
       .catch(error => {
         console.error('there was an error while trying to login', error);

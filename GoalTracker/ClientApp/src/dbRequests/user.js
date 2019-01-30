@@ -13,4 +13,17 @@ const addUser = (user) => {
   })
 }
 
-export default {addUser}
+const getUId = (email) => {
+  return new Promise((resolve,reject) => {
+    axios
+      .get(`/api/user/getuid/${email}`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  })
+}
+
+export default {addUser, getUId}

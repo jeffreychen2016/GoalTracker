@@ -3,7 +3,7 @@ import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { Profile } from './components/Profile/Profile';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import firebase from 'firebase';
@@ -38,7 +38,7 @@ const PublicRoute = ({ component: Component, authed, ...rest}) => {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: '/counter', state: {from: props.location}}}
+            to={{ pathname: '/profile', state: {from: props.location}}}
           />
         )
       }
@@ -81,8 +81,8 @@ export default class App extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <PrivateRoute 
-            path='/counter' 
-            component={Counter} 
+            path='/profile' 
+            component={Profile} 
             authed={this.state.authed}
           />
           <PrivateRoute 

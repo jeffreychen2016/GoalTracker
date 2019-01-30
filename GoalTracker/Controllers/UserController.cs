@@ -26,5 +26,11 @@ namespace GoalTracker.Controllers
         {
             return Ok(_userAccess.AddUser(user));
         }
+
+        [HttpGet("getuid/{email}")]
+        public IActionResult GetUId(string email)
+        {
+            return Ok(_userAccess.GetUId(email));
+        }
     }
 }
