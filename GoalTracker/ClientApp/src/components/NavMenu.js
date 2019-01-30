@@ -44,9 +44,9 @@ export class NavMenu extends Component {
                 <Glyphicon glyph='home' /> Home
               </NavItem>
             </LinkContainer>
-            <LinkContainer to={'/counter'}>
+            <LinkContainer to={'/profile'}>
               <NavItem>
-                <Glyphicon glyph='user' /> Profile Setting
+                <Glyphicon glyph='user' /> Profile
               </NavItem>
             </LinkContainer>
             <LinkContainer to={'/fetchdata'}>

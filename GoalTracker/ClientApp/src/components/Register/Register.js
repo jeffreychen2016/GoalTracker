@@ -30,7 +30,7 @@ export class Register extends Component {
         //after register user with firebase
         //then also post data to database
         userRequests.addUser(this.state.user).then(() => {
-          this.props.history.push('/counter');
+          this.props.history.push('/profile');
         })
       })
       .catch(error => {
