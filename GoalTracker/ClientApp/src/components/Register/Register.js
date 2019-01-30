@@ -23,6 +23,10 @@ export class Register extends Component {
     authRequests
       .registerUser(user)
       .then(() => {
+        //after register user with firebase
+        //then also post data to database
+        
+
         this.props.history.push('/counter');
       })
       .catch(error => {
@@ -50,7 +54,7 @@ export class Register extends Component {
 
   lastNameChange = e => {
     const tempUser = { ...this.state.user };
-    tempUser.firstName = e.target.value;
+    tempUser.lastName = e.target.value;
     this.setState({ user: tempUser });
   };
 
