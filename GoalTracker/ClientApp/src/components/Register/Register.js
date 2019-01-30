@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import authRequests from '../../firebaseRequests/auth';
 import { Link } from 'react-router-dom'; 
 import './Register.css'
+import userRequests from '../../dbRequests/user';
 
 export class Register extends Component {
     
@@ -22,8 +23,15 @@ export class Register extends Component {
     e.preventDefault();
     authRequests
       .registerUser(user)
-      .then(() => {
-        this.props.history.push('/counter');
+      .then((res) => {
+        const tempUser = { ...this.state.user };
+        tempUser.firebaseId = res.user.uid;
+        this.setState({ user: tempUser });
+        //after register user with firebase
+        //then also post data to database
+        userRequests.addUser(this.state.user).then(() => {
+          this.props.history.push('/counter');
+        })
       })
       .catch(error => {
         console.error('there was an error when registering', error);
@@ -50,7 +58,7 @@ export class Register extends Component {
 
   lastNameChange = e => {
     const tempUser = { ...this.state.user };
-    tempUser.firstName = e.target.value;
+    tempUser.lastName = e.target.value;
     this.setState({ user: tempUser });
   };
 
