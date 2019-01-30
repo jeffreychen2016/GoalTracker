@@ -23,10 +23,12 @@ export class Register extends Component {
     e.preventDefault();
     authRequests
       .registerUser(user)
-      .then(() => {
+      .then((res) => {
+        const tempUser = { ...this.state.user };
+        tempUser.firebaseId = res.user.uid;
+        this.setState({ user: tempUser });
         //after register user with firebase
         //then also post data to database
-        console.error(this.state.user);
         userRequests.addUser(this.state.user).then(() => {
           this.props.history.push('/counter');
         })
