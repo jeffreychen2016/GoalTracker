@@ -4,10 +4,14 @@ import goalRequests from '../../firebaseRequests/goal';
 
 export class GoalPanel extends Component {
 
+  state = {
+    detail: ''
+  }
+
   componentDidMount () {
     goalRequests.getGoal()
       .then((res) => {
-        console.error(res);
+        this.setState({detail: res});
       })
       .catch((err) => {
         console.error('there was an error while trying to get user goal', err)
@@ -24,8 +28,8 @@ export class GoalPanel extends Component {
           id="exampleFormControlTextarea3" 
           rows="7"
           placeholder="Your fitness goal for the year..."
-        >
-        </textarea>
+          value={this.state.detail}
+        />
         <button type="button" className="btn btn-primary btn-rounded">Edit</button>
         <button type="button" className="btn btn-default btn-rounded">Delete</button>
       </div>

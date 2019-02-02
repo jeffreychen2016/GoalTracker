@@ -53,9 +53,11 @@ export default class App extends Component {
   }
 
   logout = () => {
-    authRequests.logoutUser().then(() => {
-      this.setState({authed: false});
-    });   
+    authRequests.logoutUser()
+      .then(() => {
+        this.setState({authed: false});
+      })
+      .catch(err => ('shit broke', err));   
   };
 
   componentDidMount () {
