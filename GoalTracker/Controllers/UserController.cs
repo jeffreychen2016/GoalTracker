@@ -29,7 +29,6 @@ namespace GoalTracker.Controllers
         }
 
         [HttpGet("getuid/{email}")]
-        [AllowAnonymous]
         public IActionResult GetUId(string email)
         {
             return Ok(_userAccess.GetUId(email));
