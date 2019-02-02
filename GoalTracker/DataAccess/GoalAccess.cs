@@ -33,5 +33,20 @@ namespace GoalTracker.DataAccess
             }
         }
 
+        public bool DeleteGoal(string firebaseId)
+        {
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+
+                var result = dbConnection.Execute(@"DELETE g
+                                                                        FROM goals g
+                                                                        INNER JOIN users u
+                                                                        ON g.userId = u.id
+                                                                        WHERE u.firebaseId = @firebaseId", new { firebaseId });
+
+                return result == 1;
+            }
+        }
     }
 }

@@ -21,9 +21,16 @@ namespace GoalTracker.Controllers
         }
 
         [HttpGet("getgoal")]
-        public IActionResult GetAllComputers()
+        public IActionResult GetGoal()
         {
+            // UserId is the firebase UId inherited from SecureController
             return Ok(_goalAccess.GetGoal(UserId));
+        }
+
+        [HttpDelete("deletegoal")]
+        public IActionResult DeleteGoal()
+        {
+            return Ok(_goalAccess.DeleteGoal(UserId));
         }
     }
 }
