@@ -31,6 +31,10 @@ export class GoalPanel extends Component {
       })
   }
 
+  goalChange = (e) => {
+    this.setState({detail: e.target.value});
+  }
+
   render() {
     return (
       <div className="form-group col-sm-6 col-sm-offset-3">
@@ -40,7 +44,16 @@ export class GoalPanel extends Component {
           rows="7"
           placeholder="Your fitness goal for the year..."
           value={this.state.detail}
+          onChange={this.goalChange}
         />
+        
+        <button 
+          type="button" 
+          className="btn btn-primary btn-rounded"
+        >
+        Add
+        </button>
+
         <button type="button" className="btn btn-primary btn-rounded">Edit</button>
         <button 
           type="button" 
