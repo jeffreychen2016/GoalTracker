@@ -5,7 +5,7 @@ const getGoal = () => {
     axios
       .get(`/api/goal/getgoal`)
       .then((res) => {
-        resolve(res.data.detail);
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err);
@@ -39,10 +39,10 @@ const addGoal = (goalDetail) => {
   })
 }
 
-const editGoal = (goalId,goalDetail) => {
+const editGoal = (goalDetail) => {
   return new Promise((resolve,reject) => {
     axios
-      .put(`/api/goal/editgoal/${goalId}`,goalDetail)
+      .put(`/api/goal/editgoal`,goalDetail)
       .then((res) => {
         resolve(res);
       })

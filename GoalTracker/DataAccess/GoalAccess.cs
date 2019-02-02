@@ -66,7 +66,7 @@ namespace GoalTracker.DataAccess
         }
 
         
-        public bool EditGoal(string firebaseId, string detail, int goalId)
+        public bool EditGoal(string firebaseId, string detail)
         {
             using (var dbConnection = new SqlConnection(ConnectionString))
             {
@@ -78,7 +78,7 @@ namespace GoalTracker.DataAccess
                                                     INNER JOIN users u
                                                     ON g.userId = u.id
                                                     WHERE u.firebaseId =  @firebaseId
-                                                    AND g.id LIKE '%' + @goalId + '%'", new { firebaseId, detail,goalId });
+                                                    ", new { firebaseId, detail });
 
                 return result == 1;
             }
