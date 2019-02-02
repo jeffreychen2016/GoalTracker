@@ -26,4 +26,17 @@ const deleteGoal = () => {
   })
 }
 
-export default {getGoal, deleteGoal};
+const addGoal = (goalDetail) => {
+  return new Promise((resolve,reject) => {
+    axios
+      .post(`/api/goal/addgoal`,goalDetail)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  })
+}
+
+export default {getGoal, deleteGoal, addGoal};

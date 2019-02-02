@@ -35,6 +35,20 @@ export class GoalPanel extends Component {
     this.setState({detail: e.target.value});
   }
 
+  addGoalClickEvent = () => {
+    // addGoal in the backend is expecting an object
+    goalRequests.addGoal(this.state)
+      .then(() => {
+        goalRequests.getGoal()
+          .then((res) => {
+            this.setState({detail: res});
+          })
+      })
+      .catch((err) => {
+        console.error('there was an error while trying to add user goal', err)
+      })
+  }
+
   render() {
     return (
       <div className="form-group col-sm-6 col-sm-offset-3">
@@ -46,10 +60,11 @@ export class GoalPanel extends Component {
           value={this.state.detail}
           onChange={this.goalChange}
         />
-        
+
         <button 
           type="button" 
           className="btn btn-primary btn-rounded"
+          onClick={this.addGoalClickEvent}
         >
         Add
         </button>

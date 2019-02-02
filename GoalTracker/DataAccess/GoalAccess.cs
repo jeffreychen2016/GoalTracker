@@ -40,10 +40,26 @@ namespace GoalTracker.DataAccess
                 dbConnection.Open();
 
                 var result = dbConnection.Execute(@"DELETE g
-                                                                        FROM goals g
-                                                                        INNER JOIN users u
-                                                                        ON g.userId = u.id
-                                                                        WHERE u.firebaseId = @firebaseId", new { firebaseId });
+                                                     FROM goals g
+                                                     INNER JOIN users u
+                                                     ON g.userId = u.id
+                                                     WHERE u.firebaseId = @firebaseId", new { firebaseId });
+
+                return result == 1;
+            }
+        }
+
+
+        public bool AddGoal(string firebaseId, string detail)
+        {
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+
+                var result = dbConnection.Execute(@"INSERT INTO goals (detail,userId,goalTypeId) 
+                                                    SELECT @detail, u.id, 1
+                                                    FROM users u
+                                                    WHERE u.firebaseId = @firebaseId", new { firebaseId, detail });
 
                 return result == 1;
             }

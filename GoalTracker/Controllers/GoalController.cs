@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GoalTracker.DataAccess;
+using GoalTracker.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,12 @@ namespace GoalTracker.Controllers
         public IActionResult DeleteGoal()
         {
             return Ok(_goalAccess.DeleteGoal(UserId));
+        }
+
+        [HttpPost("addgoal")]
+        public IActionResult AddGoal(Goal goal)
+        {
+            return Ok(_goalAccess.AddGoal(UserId, goal.Detail));
         }
     }
 }
