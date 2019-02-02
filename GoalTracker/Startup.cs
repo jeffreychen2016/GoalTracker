@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GoalTracker
 {
@@ -21,6 +23,23 @@ namespace GoalTracker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.IncludeErrorDetails = true;
+                    options.Authority = "https://securetoken.google.com/goaltracker-5d2dc";
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "https://securetoken.google.com/goaltracker-5d2dc",
+                        ValidateAudience = true,
+                        ValidAudience = "goaltracker-5d2dc",
+                        ValidateLifetime = true
+                    };
+                }
+            );
             services.AddSingleton<IConfiguration>(Configuration);
 
             // In production, the React files will be served from this directory
@@ -44,6 +63,14 @@ namespace GoalTracker
             }
 
             app.UseHttpsRedirection();
+
+            // authentication
+            app.UseAuthentication();
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
+            });
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
