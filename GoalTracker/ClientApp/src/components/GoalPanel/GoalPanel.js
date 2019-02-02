@@ -1,7 +1,82 @@
 import React, { Component } from 'react';
+import goalRequests from '../../firebaseRequests/goal';
+
 
 export class GoalPanel extends Component {
-  displayName = GoalPanel.name
+
+  state = {
+    detail: '',
+    isDisabled: false
+  }
+
+  componentDidMount () {
+    goalRequests.getGoal()
+      .then((res) => {
+        if (res) {
+          this.setState({detail: res}, () => {
+            this.setState({ isDisabled: true });
+          });
+        }
+        else
+        {
+          this.setState({ isDisabled: false });
+        }
+      })
+      .catch((err) => {
+        console.error('there was an error while trying to get user goal', err)
+      })
+  }
+
+  deleteGoalClickEvent = () => {
+    goalRequests.deleteGoal()
+      .then(() => {
+        goalRequests.getGoal()
+          .then((res) => {
+            this.setState({detail: res}, () => {
+              this.setState({ isDisabled: false });
+            });
+          })
+      })
+      .catch((err) => {
+        console.error('there was an error while trying to delete user goal', err)
+      })
+  }
+
+  goalChange = (e) => {
+    this.setState({detail: e.target.value});
+  }
+
+  addGoalClickEvent = () => {
+    // addGoal in the backend is expecting an object
+    goalRequests.addGoal(this.state)
+      .then(() => {
+        goalRequests.getGoal()
+          .then((res) => {
+            this.setState({detail: res}, () => {
+              this.setState({ isDisabled: true});
+            });
+          })
+      })
+      .catch((err) => {
+        console.error('there was an error while trying to add user goal', err)
+      })
+  }
+
+  editGoalClickEvent = () => {
+    // addGoal in the backend is expecting an object
+    goalRequests.editGoal(this.state)
+      .then(() => {
+        goalRequests.getGoal()
+          .then((res) => {
+            this.setState({detail: res}, () => {
+              this.setState({ isDisabled: true});
+            });
+          })
+      })
+      .catch((err) => {
+        console.error('there was an error while trying to edit user goal', err)
+      })
+  }
 
   render() {
     return (
@@ -11,10 +86,31 @@ export class GoalPanel extends Component {
           id="exampleFormControlTextarea3" 
           rows="7"
           placeholder="Your fitness goal for the year..."
+          value={this.state.detail}
+          onChange={this.goalChange}
+        />
+
+        <button 
+          type="button" 
+          className="btn btn-primary btn-rounded"
+          onClick={this.addGoalClickEvent}
+          disabled={this.state.isDisabled}
         >
-        </textarea>
-        <button type="button" className="btn btn-primary btn-rounded">Edit</button>
-        <button type="button" className="btn btn-default btn-rounded">Delete</button>
+        Add
+        </button>
+
+        <button 
+          type="button" 
+          className="btn btn-primary btn-rounded"
+          onClick={this.editGoalClickEvent}
+        >Edit</button>
+        <button 
+          type="button" 
+          className="btn btn-default btn-rounded"
+          onClick={this.deleteGoalClickEvent}
+        >
+        Delete
+        </button>
       </div>
     );
   }
