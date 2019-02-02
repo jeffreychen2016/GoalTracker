@@ -5,13 +5,22 @@ import goalRequests from '../../firebaseRequests/goal';
 export class GoalPanel extends Component {
 
   state = {
-    detail: ''
+    detail: '',
+    isDisabled: false
   }
 
   componentDidMount () {
     goalRequests.getGoal()
       .then((res) => {
-        this.setState({detail: res});
+        if (res) {
+          this.setState({detail: res}, () => {
+            this.setState({ isDisabled: true });
+          });
+        }
+        else
+        {
+          this.setState({ isDisabled: false });
+        }
       })
       .catch((err) => {
         console.error('there was an error while trying to get user goal', err)
@@ -23,7 +32,9 @@ export class GoalPanel extends Component {
       .then(() => {
         goalRequests.getGoal()
           .then((res) => {
-            this.setState({detail: res});
+            this.setState({detail: res}, () => {
+              this.setState({ isDisabled: false });
+            });
           })
       })
       .catch((err) => {
@@ -41,7 +52,9 @@ export class GoalPanel extends Component {
       .then(() => {
         goalRequests.getGoal()
           .then((res) => {
-            this.setState({detail: res});
+            this.setState({detail: res}, () => {
+              this.setState({ isDisabled: true});
+            });
           })
       })
       .catch((err) => {
@@ -65,6 +78,7 @@ export class GoalPanel extends Component {
           type="button" 
           className="btn btn-primary btn-rounded"
           onClick={this.addGoalClickEvent}
+          disabled={this.state.isDisabled}
         >
         Add
         </button>
