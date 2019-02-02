@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
+import goalRequests from '../../firebaseRequests/goal';
+
 
 export class GoalPanel extends Component {
-  displayName = GoalPanel.name
+
+  componentDidMount () {
+    goalRequests.getGoal()
+      .then((res) => {
+        console.error(res);
+      })
+      .catch((err) => {
+        console.error('there was an error while trying to get user goal', err)
+      })
+  }
 
   render() {
+
+    
     return (
       <div className="form-group col-sm-6 col-sm-offset-3">
         <textarea 

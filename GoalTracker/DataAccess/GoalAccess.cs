@@ -17,16 +17,17 @@ namespace GoalTracker.DataAccess
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
-        public string GetGoal(string id)
+        public string GetGoal(string firebaseId)
         {
             using (var dbConnection = new SqlConnection(ConnectionString))
             {
                 dbConnection.Open();
 
-                var goal = dbConnection.QueryFirstOrDefault<string>(@"
-                                                                    SELECT detail 
-                                                                    FROM goals 
-                                                                    WHERE userId = @id", new { id });
+                var goal = dbConnection.QueryFirstOrDefault<string>(@"SELECT g.detail 
+                                                                    FROM goals g
+                                                                    INNER JOIN users u
+                                                                    ON g.userId = u.id
+                                                                    WHERE u.firebaseId = @firebaseId", new { firebaseId });
 
                 return goal;
             }

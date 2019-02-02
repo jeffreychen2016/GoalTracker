@@ -3,7 +3,7 @@ import axios from 'axios';
 const getGoal = () => {
   return new Promise((resolve,reject) => {
     axios
-      .get(`/api/user/getuid/${email}`)
+      .get(`/api/goal/getgoal`)
       .then((res) => {
         resolve(res.data);
       })
@@ -13,4 +13,4 @@ const getGoal = () => {
   })
 }
 
-export default {loginUser, logoutUser, registerUser};
+export default {getGoal};
