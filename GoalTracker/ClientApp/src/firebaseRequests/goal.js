@@ -5,7 +5,7 @@ const getGoal = () => {
     axios
       .get(`/api/goal/getgoal`)
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data.detail);
       })
       .catch((err) => {
         reject(err);
@@ -39,4 +39,17 @@ const addGoal = (goalDetail) => {
   })
 }
 
-export default {getGoal, deleteGoal, addGoal};
+const editGoal = (goalId,goalDetail) => {
+  return new Promise((resolve,reject) => {
+    axios
+      .put(`/api/goal/editgoal/${goalId}`,goalDetail)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  })
+}
+
+export default {getGoal, deleteGoal, addGoal, editGoal};

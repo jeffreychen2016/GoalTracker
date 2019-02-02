@@ -39,5 +39,11 @@ namespace GoalTracker.Controllers
         {
             return Ok(_goalAccess.AddGoal(UserId, goal.Detail));
         }
+
+        [HttpPut("editgoal")]
+        public IActionResult EditGoal(Goal goal)
+        {
+            return Ok(_goalAccess.AddGoal(UserId, goal.Detail));
+        }
     }
 }

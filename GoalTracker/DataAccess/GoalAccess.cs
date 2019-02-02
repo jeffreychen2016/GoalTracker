@@ -64,5 +64,24 @@ namespace GoalTracker.DataAccess
                 return result == 1;
             }
         }
+
+        
+        public bool EditGoal(string firebaseId, string detail, int goalId)
+        {
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+
+                var result = dbConnection.Execute(@"UPDATE goals
+                                                    SET	detail = @detail
+                                                    FROM goals g
+                                                    INNER JOIN users u
+                                                    ON g.userId = u.id
+                                                    WHERE u.firebaseId =  @firebaseId
+                                                    AND g.id LIKE '%' + @goalId + '%'", new { firebaseId, detail,goalId });
+
+                return result == 1;
+            }
+        }
     }
 }
